@@ -69,19 +69,18 @@
  Governing Equations (0-linear,    1-nonlinear) :       1        
  Grid Size       (dx, sph:minutes, Cart:meters) :       0.3      
  Time Step Size                       (seconds) :       1.0      
- Bottom Friction Switch (0-ON;1-OFF;2-ON,Var.n) :       1        
+ Bottom Friction Switch (0-ON;1-OFF;2-ON,Var.n) :       0        
  Manning's n (for Fric.Switch=0), {land, water} :       0.025    
  Output Option?   (0-Z+Hu+Hv; 1-Z Only; 2-NONE) :       0        
- X_start                                        :     121.000
- X_end											:	  123.500
- Y_Start                                        :      -9.000    
- Y_end                                          :      -7.500 
+ X_Start                               (degree) :       121.000  
+ X_End                                 (degree) :       123.500  
+ Y_Start                               (degree) :      -9.000    
+ Y_End                                 (degree) :      -7.500    
  File Name of Bathymetry Data                   : batimetri_layer1.asc
  Format  (0-OLD;1-MOST;2-XYZ BP;3-XYZ BN;4-ASC) :       4        
  Grid Identification Number (ID)                :      01        
  Grid Level                                     :      01        
- Parent Grid Layer's ID Number                  :      01        
-#
+ Parent Grid Layer's ID Number                  :      01
 #===============================================:================
 #  Parameters for Sub-level grid -- layer 02    :Values         |
 #===============================================:================
