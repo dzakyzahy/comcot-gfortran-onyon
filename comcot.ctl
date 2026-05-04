@@ -1,363 +1,660 @@
-#################################################
-#                                               #
-# Control file for COMCOT program (v1.7)        #
-# Sample                                        #
-#################################################
-#--+-----1----+----2----+----3----+----4----+----5----+----6----+----7----+----8
-#===============================================:===============================
-# General Parameters for Simulation             : Value Field                  |
-#===============================================:===============================
-#Job Description: NZ30sec bathymetry, Spherical Coordinates for code testing
- Total run time (Wall clock, seconds)           :   7200.0
- Time interval to Save Data    ( unit: sec )    :   1800.0
- Output Zmax & TS (0-Max Z;1-Timeseries;2-Both) :     2
+#################################################################
+#                                                               #
+#      Control file for COMCOT tsunami simulation package       #
+#      - Main Configuration File (comcot.ctl)                   #
+#                                                               #
+#---+----1----+----2----+----3----+----4----+----5----+----6----#
+#===============================================:================
+# General Parameters for Simulation             : Value Field   |
+#===============================================:================
+ Job Description: One-line brief description may be added here  
+ Total Simulated Duration (Wall clock, seconds) : 7200.000    
+ Time Interval for Snapshot Output    (seconds) :    60.0       
+ Zmax & Gauge Output  (0-ZMax Z;1-Gauge;2-Both) :       2        
+ Start Type (0-Cold start; 1-Hot start)         :       0
+ Resuming Time for Hot Start          (Seconds) :       0.00
+ Minimum WaterDepth offshore           (meters) :       0.01      
+ Initial Cond. (0:FLT,1:File,2:WM,3:LS,4:FLT+LS):       0         
+ Boundary Cond.(0-Open;1-Absorb;2-Wall;3-FACTS) :       1
+# Specify Filename of z Input (for BC=3, FACTS) : 23926h.asc
+# Specify Filename of u Input (for BC=3, FACTS) : 23926u.asc
+# Specify Filename of v Input (for BC=3, FACTS) : 23926v.asc
+#
+#===============================================:================
+# Parameters for Fault Model (Segment 01)       :Values         |
+#===============================================:================
+ Number of FLT Planes (use fault_multi.ctl if>1):      2        
+ Rupture Start Time(,Uplift Duration)  (seconds):       0.0      
+ Faulting Option (0:Model-C; 1:Data; 9:Model-T) :       0        
+ Focal Depth                            (meters):   9000.000     
+ Length of Fault Plane                  (meters):  80000.000    
+ Width of Fault Plane                   (meters):  40000.000    
+ Dislocation of Fault Plane             (meters):      3.2000     
+ Strike Angle (theta)                  (degrees):     85.000    
+ Dip  Angle (delta)                    (degrees):     23.000    
+ Slip/Rake Angle (lamda)               (degrees):    108.000    
+ Origin of Numerical Domain: Latitude  (degrees):     -9.000  
+ Origin of Numerical Domain: Longitude (degrees):    121.000    
+ Epicenter Location: Latitude          (degrees):     -8.5320  
+ Epicenter Location: Longitude         (degrees):    122.025  
+ File Name of Input Data                        : none
+ Data Format (0-COMCOT;1-MOST;2-XYZ;3-ASC)      :       0        
+#
+#===============================================:================
+#  Parameters for Incident Wave Maker           :Values         |
+#===============================================:================
+ Wave Type  (1-Solitary; 2-given; 3-focusing)   :       1        
+# File Name of Input Data (for Type=2)          : fse.dat
+ Incident direction( 1:tp,2:bt,3:lf,4:rt,5:obl) :       2        
+ Characteristic Wave Amplitude         (meters) :       0.500    
+ Typical Water depth                   (meters) :    2000.000    
+#
+#===============================================:================
+#  Parameters for Landslide / Ground Motion     :Values         |
+#===============================================:================
+ X_Start of Transient Motion Area               :     127.363     
+ X_End of Transient Motion Area                 :     129.971    
+ Y_Start of Transient Motion Area               :      -5.220    
+ Y_End of Transient Motion Area                 :      -2.707     
+# File Name of Shape Input[, format(3-XYZ;4-ASC)]: MULTIPLE
+ Option (0-OLD; 1-XYT; 2-LS.Solid; 3-LS.Flow)   :       2        
+#
+#===============================================:================
+# Configurations for all grid layers                             
+#===============================================:================
+# Parameters for 1st-level grids -- layer 01    :Values         |
+#===============================================:================
+ Run This Layer ?       (0:Yes,       1:No     ):       0        
+ Coordinate System   (0-Spherical, 1-Cartesian) :       0        
+ Governing Equations (0-linear,    1-nonlinear) :       1        
+ Grid Size       (dx, sph:minutes, Cart:meters) :       0.3      
+ Time Step Size                       (seconds) :       1.0      
+ Bottom Friction Switch (0-ON;1-OFF;2-ON,Var.n) :       1        
+ Manning's n (for Fric.Switch=0), {land, water} :       0.025    
+ Output Option?   (0-Z+Hu+Hv; 1-Z Only; 2-NONE) :       0        
+ X_start                                        :     121.000
+ X_end											:	  123.500
+ Y_Start                                        :      -9.000    
+ Y_end                                          :      -7.500 
+ File Name of Bathymetry Data                   : batimetri_layer1.asc
+ Format  (0-OLD;1-MOST;2-XYZ BP;3-XYZ BN;4-ASC) :       4        
+ Grid Identification Number (ID)                :      01        
+ Grid Level                                     :      01        
+ Parent Grid Layer's ID Number                  :      01        
+#
+#===============================================:================
+#  Parameters for Sub-level grid -- layer 02    :Values         |
+#===============================================:================
+ Run This Layer ?       (0:Yes,       1:No     ):       0        
+ Coordinate System   (0:spherical, 1:cartesian) :       0        
+ Governing Equations (0:linear,    1:nonlinear) :       1        
+ Bottom Friction Switch (0-ON,1-OFF,2:ON,Var.n) :       0        
+ Manning's n (for Fric.Switch=0), {land, water} :       0.025    
+ Output Option? (0-Z+Hu+Hv; 1-Z Only; 2-NONE)   :       0        
+ GridSize Ratio of Parent Grid to Current Grid  :       5        
+ X_start                                        :    122.000
+ X_end                                          :    123.000
+ Y_Start                                        :     -8.800
+ Y_end                                          :     -8.200
+ File Name of Bathymetry Data                   :  batimetri_layer2.asc
+ Format (0-OLD;1-MOST;2-XYZ BP;3-XYZ BN;4-ASC)  :       4        
+ Grid Identification Number (ID)                :      02
+ Grid Level                                     :      02
+ Parent Grid Layer's ID Number                  :      01
+#
+#===============================================:================
+#  Parameters for Sub-level grid -- layer 03    :Values         |
+#===============================================:================
+ Run This Layer ?       (0:Yes,       1:No     ):       0        
+ Coordinate System   (0:spherical, 1:cartesian) :       0        
+ Governing Equations (0:linear,    1:nonlinear) :       1        
+ Bottom Friction Switch (0-ON,1-OFF,2:ON,Var.n) :       0        
+ Manning's n (for Fric.Switch=0), {land, water} :       0.013    
+ Output Option? (0-Z+Hu+Hv; 1-Z Only; 2-NONE)   :       0        
+ GridSize Ratio of Parent Grid to Current Grid  :      10        
+ X_start                                        :    122.480
+ X_end                                          :    122.540
+ Y_Start                                        :     -8.450
+ Y_end                                          :     -8.390
+ File Name of Bathymetry Data                   :  batimetri_layer3.asc 
+ Format (0-OLD;1-MOST;2-XYZ BP;3-XYZ BN;4-ASC)  :       4        
+ Grid Identification Number (ID)                :      03
+ Grid Level                                     :      03
+ Parent Grid Layer's ID Number                  :      02
+#
+#===============================================:================
+#  Parameters for Sub-level grid -- layer 04    :Values         |
+#===============================================:================
+ Run This Layer ?       (0:Yes,       1:No     ):       1        
+ Coordinate System   (0:spherical, 1:cartesian) :       0        
+ Governing Equations (0:linear,    1:nonlinear) :       1        
+ Bottom Friction Switch (0-ON,1-OFF,2:ON,Var.n) :       1        
+ Manning's n (for Fric.Switch=0), {land, water} :       0.013    
+ Output Option? (0-Z+Hu+Hv; 1-Z Only; 2-NONE)   :       0        
+ GridSize Ratio of Parent Grid to Current Grid  :       8        
+ X_start                                        :    123.00005
+ X_end                                          :    123.11995
+ Y_Start                                        :    0.46005
+ Y_end                                          :    0.58995
+ File Name of Bathymetry Data                   :layer4_RBI_rev.asc
+ Format (0-OLD;1-MOST;2-XYZ BP;3-XYZ BN;4-ASC)  :       4        
+ Grid Identification Number (ID)                :      04
+ Grid Level                                     :      04
+ Parent Grid Layer's ID Number                  :      03
+#
+#===============================================:================
+#  Parameters for Sub-level grid -- layer 05    :Values         |
+#===============================================:================
+ Run This Layer ?       (0:Yes,       1:No     ):       1        
+ Coordinate System   (0:spherical, 1:cartesian) :       0        
+ Governing Equations (0:linear,    1:nonlinear) :       0        
+ Bottom Friction Switch (0-ON,1-OFF,2:ON,Var.n) :       1        
+ Manning's n (for Fric.Switch=0), {land, water} :       0.013    
+ Output Option? (0-Z+Hu+Hv; 1-Z Only; 2-NONE)   :       2        
+ GridSize Ratio of Parent Grid to Current Grid  :       2        
+ X_start                                        :    168.3714
+ X_end                                          :    183.3672
+ Y_Start                                        :    -46.4622
+ Y_end                                          :    -35.4359
+ File Name of Bathymetry Data                   :grid01_updated.xyz
+ Format (0-OLD;1-MOST;2-XYZ BP;3-XYZ BN;4-ASC)  :       3        
+ Grid Identification Number (ID)                :      05
+ Grid Level                                     :      05
+ Parent Grid Layer's ID Number                  :      04
+#
+#===============================================:================
+#  Parameters for Sub-level grid -- layer 06    :Values         |
+#===============================================:================
+ Run This Layer ?       (0:Yes,       1:No     ):       1        
+ Coordinate System   (0:spherical, 1:cartesian) :       0        
+ Governing Equations (0:linear,    1:nonlinear) :       0        
+ Bottom Friction Switch (0-ON,1-OFF,2:ON,Var.n) :       1        
+ Manning's n (for Fric.Switch=0), {land, water} :       0.013    
+ Output Option? (0-Z+Hu+Hv; 1-Z Only; 2-NONE)   :       2        
+ GridSize Ratio of Parent Grid to Current Grid  :       2        
+ X_start                                        :    169.1211
+ X_end                                          :    182.6549
+ Y_Start                                        :    -45.9109
+ Y_end                                          :    -35.9596
+ File Name of Bathymetry Data                   :grid01_updated.xyz
+ Format (0-OLD;1-MOST;2-XYZ BP;3-XYZ BN;4-ASC)  :       3        
+ Grid Identification Number (ID)                :      06
+ Grid Level                                     :      06
+ Parent Grid Layer's ID Number                  :      05
+#
+#===============================================:================
+#  Parameters for Sub-level grid -- layer 07    :Values         |
+#===============================================:================
+ Run This Layer ?       (0:Yes,       1:No     ):       1        
+ Coordinate System   (0:spherical, 1:cartesian) :       0        
+ Governing Equations (0:linear,    1:nonlinear) :       0        
+ Bottom Friction Switch (0-ON,1-OFF,2:ON,Var.n) :       1        
+ Manning's n (for Fric.Switch=0), {land, water} :       0.013    
+ Output Option? (0-Z+Hu+Hv; 1-Z Only; 2-NONE)   :       2        
+ GridSize Ratio of Parent Grid to Current Grid  :       2        
+ X_start                                        :    169.7978
+ X_end                                          :    182.0121
+ Y_Start                                        :    -45.4134
+ Y_end                                          :    -36.4323
+ File Name of Bathymetry Data                   :grid01_updated.xyz
+ Format (0-OLD;1-MOST;2-XYZ BP;3-XYZ BN;4-ASC)  :       3        
+ Grid Identification Number (ID)                :      07
+ Grid Level                                     :      07
+ Parent Grid Layer's ID Number                  :      06
+#
+#===============================================:================
+#  Parameters for Sub-level grid -- layer 08    :Values         |
+#===============================================:================
+ Run This Layer ?       (0:Yes,       1:No     ):       1        
+ Coordinate System   (0:spherical, 1:cartesian) :       0        
+ Governing Equations (0:linear,    1:nonlinear) :       0        
+ Bottom Friction Switch (0-ON,1-OFF,2:ON,Var.n) :       1        
+ Manning's n (for Fric.Switch=0), {land, water} :       0.013    
+ Output Option? (0-Z+Hu+Hv; 1-Z Only; 2-NONE)   :       2        
+ GridSize Ratio of Parent Grid to Current Grid  :       2        
+ X_start                                        :    170.4085
+ X_end                                          :    181.4319
+ Y_Start                                        :    -44.9643
+ Y_end                                          :    -36.8589
+ File Name of Bathymetry Data                   :grid01_updated.xyz
+ Format (0-OLD;1-MOST;2-XYZ BP;3-XYZ BN;4-ASC)  :       3        
+ Grid Identification Number (ID)                :      08
+ Grid Level                                     :      08
+ Parent Grid Layer's ID Number                  :      07
+#
+#===============================================:================
+#  Parameters for Sub-level grid -- layer 09    :Values         |
+#===============================================:================
+ Run This Layer ?       (0:Yes,       1:No     ):       1        
+ Coordinate System   (0:spherical, 1:cartesian) :       0        
+ Governing Equations (0:linear,    1:nonlinear) :       0        
+ Bottom Friction Switch (0-ON,1-OFF,2:ON,Var.n) :       1        
+ Manning's n (for Fric.Switch=0), {land, water} :       0.013    
+ Output Option? (0-Z+Hu+Hv; 1-Z Only; 2-NONE)   :       2        
+ GridSize Ratio of Parent Grid to Current Grid  :       2        
+ X_start                                        :    170.9597
+ X_end                                          :    180.9083
+ Y_Start                                        :    -44.5590
+ Y_end                                          :    -37.2439
+ File Name of Bathymetry Data                   :grid01_updated.xyz
+ Format (0-OLD;1-MOST;2-XYZ BP;3-XYZ BN;4-ASC)  :       3        
+ Grid Identification Number (ID)                :      09
+ Grid Level                                     :      09
+ Parent Grid Layer's ID Number                  :      08
+#
+#===============================================:================
+#  Parameters for Sub-level grid -- layer 10    :Values         |
+#===============================================:================
+ Run This Layer ?       (0:Yes,       1:No     ):       1        
+ Coordinate System   (0:spherical, 1:cartesian) :       0        
+ Governing Equations (0:linear,    1:nonlinear) :       0        
+ Bottom Friction Switch (0-ON,1-OFF,2:ON,Var.n) :       1        
+ Manning's n (for Fric.Switch=0), {land, water} :       0.013    
+ Output Option? (0-Z+Hu+Hv; 1-Z Only; 2-NONE)   :       2        
+ GridSize Ratio of Parent Grid to Current Grid  :       2        
+ X_start                                        :    171.4571
+ X_end                                          :    180.4357
+ Y_Start                                        :    -44.1933
+ Y_end                                          :    -37.5914
+ File Name of Bathymetry Data                   :grid01_updated.xyz
+ Format (0-OLD;1-MOST;2-XYZ BP;3-XYZ BN;4-ASC)  :       3        
+ Grid Identification Number (ID)                :      10
+ Grid Level                                     :      10
+ Parent Grid Layer's ID Number                  :      09
+#
+#===============================================:================
+#  Parameters for Sub-level grid -- layer 11    :Values         |
+#===============================================:================
+ Run This Layer ?       (0:Yes,       1:No     ):       1        
+ Coordinate System   (0:spherical, 1:cartesian) :       0        
+ Governing Equations (0:linear,    1:nonlinear) :       0        
+ Bottom Friction Switch (0-ON,1-OFF,2:ON,Var.n) :       1        
+ Manning's n (for Fric.Switch=0), {land, water} :       0.013    
+ Output Option? (0-Z+Hu+Hv; 1-Z Only; 2-NONE)   :       2        
+ GridSize Ratio of Parent Grid to Current Grid  :       2        
+ X_start                                        :    171.9061
+ X_end                                          :    180.0092
+ Y_Start                                        :    -43.8632
+ Y_end                                          :    -37.9050
+ File Name of Bathymetry Data                   :grid01_updated.xyz
+ Format (0-OLD;1-MOST;2-XYZ BP;3-XYZ BN;4-ASC)  :       3        
+ Grid Identification Number (ID)                :      11
+ Grid Level                                     :      11
+ Parent Grid Layer's ID Number                  :      10
+#
+#===============================================:================
+#  Parameters for Sub-level grid -- layer 12    :Values         |
+#===============================================:================
+ Run This Layer ?       (0:Yes,       1:No     ):       1        
+ Coordinate System   (0:spherical, 1:cartesian) :       0        
+ Governing Equations (0:linear,    1:nonlinear) :       0        
+ Bottom Friction Switch (0-ON,1-OFF,2:ON,Var.n) :       1        
+ Manning's n (for Fric.Switch=0), {land, water} :       0.013    
+ Output Option? (0-Z+Hu+Hv; 1-Z Only; 2-NONE)   :       2        
+ GridSize Ratio of Parent Grid to Current Grid  :       2        
+ X_start                                        :    172.3112
+ X_end                                          :    179.6243
+ Y_Start                                        :    -43.5653
+ Y_end                                          :    -38.1880
+ File Name of Bathymetry Data                   :grid01_updated.xyz
+ Format (0-OLD;1-MOST;2-XYZ BP;3-XYZ BN;4-ASC)  :       3        
+ Grid Identification Number (ID)                :      12
+ Grid Level                                     :      12
+ Parent Grid Layer's ID Number                  :      11
+#
+#===============================================:================
+#  Parameters for Sub-level grid -- layer 13    :Values         |
+#===============================================:================
+ Run This Layer ?       (0:Yes,       1:No     ):       1        
+ Coordinate System   (0:spherical, 1:cartesian) :       0        
+ Governing Equations (0:linear,    1:nonlinear) :       0        
+ Bottom Friction Switch (0-ON,1-OFF,2:ON,Var.n) :       1        
+ Manning's n (for Fric.Switch=0), {land, water} :       0.013    
+ Output Option? (0-Z+Hu+Hv; 1-Z Only; 2-NONE)   :       2        
+ GridSize Ratio of Parent Grid to Current Grid  :       2        
+ X_start                                        :    172.6769
+ X_end                                          :    179.2770
+ Y_Start                                        :    -43.2964
+ Y_end                                          :    -38.4434
+ File Name of Bathymetry Data                   :grid01_updated.xyz
+ Format (0-OLD;1-MOST;2-XYZ BP;3-XYZ BN;4-ASC)  :       3        
+ Grid Identification Number (ID)                :      13
+ Grid Level                                     :      13
+ Parent Grid Layer's ID Number                  :      12
+#
+#===============================================:================
+#  Parameters for Tide Gauge Locations          :Values         |
+#===============================================:================
+ 01. Number of Tide Gauges                      :      9
+ 02. File Name of Station Info                  :ts_location.dat
+#
+#################################################################
+#                                                               #
+#      Control file for COMCOT tsunami simulation package       #
+#      - Main Configuration File (comcot.ctl)                   #
+#                                                               #
+#---+----1----+----2----+----3----+----4----+----5----+----6----#
+#===============================================:================
+# General Parameters for Simulation             : Value Field   |
+#===============================================:================
+# Job Description: Flores 1992 Tsunami Simulation
+ Total Simulated Duration (Wall clock, seconds) : 7200.000    
+ Time Interval for Snapshot Output    (seconds) :    60.0        
+ Zmax & Gauge Output  (0-ZMax Z;1-Gauge;2-Both) :     4, 2         
  Start Type (0-Cold start; 1-Hot start)         :     0
- Resuming Time If hot start (Seconds)           :  100000000000000.00
- Specify Min WaterDepth offshore  (meter)       :     10.00
- Initial Cond. (0:FLT,1:File,2:WM,3:LS,4:FLT+LS):     0
- Specify BC  (0-Open;1-Sponge;2-Wall;3-FACTS)   :     0
- Specify Input Z filename (for BC=3, FACTS)     : mw94_n22_nz_ha.xyt
- Specify Input U filename (for BC=3, FACTS)     : mw94_n22_nz_ua.xyt
- Specify Input V filename (for BC=3, FACTS)     : mw94_n22_nz_va.xyt
-
-#===============================================:===============================
-# Parameters for Fault Model (Segment 01)       :Values                        |
-#===============================================:===============================
- No. of FLT Planes (With fault_multi.ctl if >1) :   1
- Fault Rupture Time (seconds)                   :   0.0
- Faulting Option (0: Model; 1- Data;)           :   9
- Focal Depth                             (meter):  20.0
- Length of source area                   (meter):  548.479219e3
- Width of source area                    (meter):  182.826406e3
- Dislocation of fault plate              (meter):  16.343058
- Strike direction (theta)               (degree):  203.0
- Dip  angle       (delta)               (degree):  10.0
- Slip angle       (lambda)              (degree):  88.0
- Origin of Comp. Domain (Layer 01) (Lat, degree):  0.0
- Origin of Comp. Domain (Layer 01) (Lon, degree):  110.0
- Epicenter Location: Latitude           (degree):  37.520
- Epicenter Location: Longitude          (degree):  143.050
- File Name of Deformation Data                  :  fault12.xyz
- Data Format Option (0-COMCOT; 1-MOST; 2-XYZ)   :     2
-
-#===============================================:===============================
-#  Parameters for Wave Maker                    :Values                        |
-#===============================================:===============================
- Wave type  ( 1:Solit, 2:given, 3:focusing )    :     1
- FileName of Customized Input (for Type=2)      : fse.dat
- Incident direction( 1:top,2:bt,3:lf,4:rt,5:ob ):     2
- Characteristic Wave Amplitude        (meter)   :     0.500
- Typical Water depth                  (meter)   :  2000.000
-
-#===============================================:===============================
-#  Parameters for Submarine LS/Transient Motion :ValUes                        |
-#===============================================:===============================
- X Coord. of Left/West Edge of Landlide Area    :  177.00
- X Coord. of Right/East Edge of Landlide Area   :  179.00
- Y Coord. of Bottom/South Edge of Landlide Area :  -41.00
- Y Coord. of Top/North Edge of Landlide Area    :  -39.00
- File Name of landslide Data                    : landslide_test.dat
- Data Format Option (0-Old; 1-XYT; 2-Function)  :     2
-
-#===============================================:===============================
-# Configurations for all grids                  :Values                        |
-#===============================================:===============================
-# Parameters for 1st-level grid -- layer 01     :Values                        |
-#===============================================:===============================
- Run This Layer ?       (0:Yes,       1:No     ):     0
- Coordinate System    (0:spherical, 1:cartesian):     0
- Governing Equations  (0:linear,    1:nonlinear):     0
- Grid Size  (dx, sph:minute, cart:meter)        :     4.0
- Time step                            ( second ):     2.0
- Bottom Friction Switch? (0:Yes,1:No,2:var. n ) :     1
- Manning's Roughness Coef. (For fric.option=0)  :     0.013
- Layer Ouput Option? (0:Z+Hu+Hv;1:Z Only;2:NONE):     0
- X_start                                        :  105.0
- X_end                                          :  300.0
- Y_Start                                        :   -56.0
- Y_end                                          :   63.0
- File Name of Bathymetry Data                   :../etopo_halk2.xyz
- Data Format Option (0-OLD;1-MOST;2-XYZ;3-ETOPO):     3
- Grid Identification Number                     :    01
- Grid Level                                     :     1
- Parent Grid's ID Number                        :    -1
-
-#===============================================:===============================
-#  Parameters for Sub-level grid -- layer 02    :Values                        |
-#===============================================:===============================
- Run This Layer ?       (0:Yes,       1:No     ):     1
- Coordinate           (0:spherical, 1:cartesian):     0
- Governing Eqn.       (0:linear,    1:nonlinear):     1
- Bottom Friction Switch? (0:Yes,1:No,2:var. n ) :     1
- Manning's Roughness Coef. (For fric.option=0)  :     0.013
- Layer Ouput Option? (0:Z+Hu+Hv;1:Z Only;2:NONE):     0
- GridSize Ratio of Parent layer to current layer:     2
- X_start                                        :   125.0
- X_end                                          :   150.0
- Y_start                                        :   30.0
- Y_end                                          :   50.0
- FileName of Water depth data                   :   jj.xyz
- Data Format Option (0-OLD;1-MOST;2-XYZ;3-ETOPO):     3
- Grid Identification Number                     :    02
- Grid Level                                     :     2
- Parent Grid's ID Number                        :    01
-
-#===============================================:===============================
-#  Parameters for Sub-level grid -- layer 03    :Values                        |
-#===============================================:===============================
- Run This Layer ?       (0:Yes,       1:No     ):     1
- Coordinate           (0:spherical, 1:cartesian):     0
- Governing Eqn.       (0:linear,    1:nonlinear):     1
- Bottom Friction Switch? (0:Yes,1:No,2:var. n ) :     0
- Manning's Roughness Coef. (For fric.option=0)  :     0.013
- Layer Ouput Option? (0:Z+Hu+Hv;1:Z Only;2:NONE):     1
- GridSize Ratio of Parent layer to current layer:     4
- X_start                                        :  119.9
- X_end                                          :  122.1
- Y_start                                        :   21.8
- Y_end                                          :   25.4
- FileName of Water depth data                   : 0125.xyz
- Data Format Option (0-OLD;1-MOST;2-XYZ;3-ETOPO):     3
- Grid Identification Number                     :    03
- Grid Level                                     :     3
- Parent Grid's ID Number                        :    02
-
-#===============================================:===============================
-#  Parameters for Sub-level grid -- layer 04    :Values                        |
-#===============================================:===============================
- Run This Layer ?       (0:Yes,       1:No     ):     1
- Coordinate           (0:spherical, 1:cartesian):     0
- Governing Eqn.       (0:linear,    1:nonlinear):     1
- Bottom Friction Switch? (0:Yes,1:No,2:var. n ) :     0
- Manning's Roughness Coef. (For fric.option=0)  :     0.013
- Layer Ouput Option? (0:Z+Hu+Hv;1:Z Only;2:NONE):     1
- GridSize Ratio of Parent layer to current layer:     16
- X_start                                        :   120.6354616225919
- X_end                                          :   120.9234496509648
- Y_start                                        :    21.84426599282262
- Y_end                                          :    22.21347088069079
- FileName of Water depth data                   :  4_1.xyz
- Data Format Option (0-OLD;1-MOST;2-XYZ;3-ETOPO):     3
- Grid Identification Number                     :    04
- Grid Level                                     :     3
- Parent Grid's ID Number                        :    02
-
-#===============================================:===============================
-#  Parameters for Sub-level grid -- layer 05    :Values                        |
-#===============================================:===============================
- Run This Layer ?       (0:Yes,       1:No     ):     1
- Coordinate           (0:spherical, 1:cartesian):     0
- Governing Eqn.       (0:linear,    1:nonlinear):     1
- Bottom Friction Switch? (0:Yes,1:No,2:var. n ) :     0
- Manning's Roughness Coef. (For fric.option=0)  :     0.013
- Layer Ouput Option? (0:Z+Hu+Hv;1:Z Only;2:NONE):     1
- GridSize Ratio of Parent layer to current layer:     16
- X_start                                        :   120.3092711496687
- X_end                                          :   120.723621321133
- Y_start                                        :    22.1896412622199
- Y_end                                          :    22.53257020096585
- FileName of Water depth data                   :  4_2.xyz
- Data Format Option (0-OLD;1-MOST;2-XYZ;3-ETOPO):     3
- Grid Identification Number                     :    05
- Grid Level                                     :     3
- Parent Grid's ID Number                        :    02
-
-#===============================================:===============================
-#  Parameters for Sub-level grid -- layer 06    :Values                        |
-#===============================================:===============================
- Run This Layer ?       (0:Yes,       1:No     ):     1
- Coordinate           (0:spherical, 1:cartesian):     0
- Governing Eqn.       (0:linear,    1:nonlinear):     1
- Bottom Friction Switch? (0:Yes,1:No,2:var. n ) :     0
- Manning's Roughness Coef. (For fric.option=0)  :     0.013
- Layer Ouput Option? (0:Z+Hu+Hv;1:Z Only;2:NONE):     1
- GridSize Ratio of Parent layer to current layer:     16
- X_start                                        :   120.0036509071348
- X_end                                          :   120.5120381818606
- Y_start                                        :    22.42373978748143
- Y_end                                          :    24.24865827343963
- FileName of Water depth data                   :  4_3.xyz
- Data Format Option (0-OLD;1-MOST;2-XYZ;3-ETOPO):     3
- Grid Identification Number                     :    06
- Grid Level                                     :     3
- Parent Grid's ID Number                        :    02
-
-#===============================================:===============================
-#  Parameters for Sub-level grid -- layer 07    :Values                        |
-#===============================================:===============================
- Run This Layer ?       (0:Yes,       1:No     ):     1
- Coordinate           (0:spherical, 1:cartesian):     0
- Governing Eqn.       (0:linear,    1:nonlinear):     1
- Bottom Friction Switch? (0:Yes,1:No,2:var. n ) :     0
- Manning's Roughness Coef. (For fric.option=0)  :     0.013
- Layer Ouput Option? (0:Z+Hu+Hv;1:Z Only;2:NONE):     1
- GridSize Ratio of Parent layer to current layer:     16
- X_start                                        :   120.4562042092812
- X_end                                          :   120.9175729323763
- Y_start                                        :    24.15490301533408
- Y_end                                          :    24.80244805853942
- FileName of Water depth data                   :  4_4.xyz
- Data Format Option (0-OLD;1-MOST;2-XYZ;3-ETOPO):     3
- Grid Identification Number                     :    07
- Grid Level                                     :     3
- Parent Grid's ID Number                        :    02
-
-#===============================================:===============================
-#  Parameters for Sub-level grid -- layer 08    :Values                        |
-#===============================================:===============================
- Run This Layer ?       (0:Yes,       1:No     ):     1
- Coordinate           (0:spherical, 1:cartesian):     0
- Governing Eqn.       (0:linear,    1:nonlinear):     1
- Bottom Friction Switch? (0:Yes,1:No,2:var. n ) :     0
- Manning's Roughness Coef. (For fric.option=0)  :     0.013
- Layer Ouput Option? (0:Z+Hu+Hv;1:Z Only;2:NONE):     1
- GridSize Ratio of Parent layer to current layer:     16
- X_start                                        :   120.808842317314
- X_end                                          :   121.3231069967601
- Y_start                                        :    24.69987279481362
- Y_end                                          :    25.19808824930069
- FileName of Water depth data                   :  4_5.xyz
- Data Format Option (0-OLD;1-MOST;2-XYZ;3-ETOPO):     3
- Grid Identification Number                     :    08
- Grid Level                                     :     3
- Parent Grid's ID Number                        :    02
-
-#===============================================:===============================
-#  Parameters for Sub-level grid -- layer 09    :Values                        |
-#===============================================:===============================
- Run This Layer ?       (0:Yes,       1:No     ):     1
- Coordinate           (0:spherical, 1:cartesian):     0
- Governing Eqn.       (0:linear,    1:nonlinear):     1
- Bottom Friction Switch? (0:Yes,1:No,2:var. n ) :     0
- Manning's Roughness Coef. (For fric.option=0)  :     0.013
- Layer Ouput Option? (0:Z+Hu+Hv;1:Z Only;2:NONE):     1
- GridSize Ratio of Parent layer to current layer:     16
- X_start                                        :   121.2320085958588
- X_end                                          :   122.0460161131184
- Y_start                                        :    24.96080357036498
- Y_end                                          :    25.3508512831777
- FileName of Water depth data                   :  4_6.xyz
- Data Format Option (0-OLD;1-MOST;2-XYZ;3-ETOPO):     3
- Grid Identification Number                     :    09
- Grid Level                                     :     3
- Parent Grid's ID Number                        :    02
-
-#===============================================:===============================
-#  Parameters for Sub-level grid -- layer 10    :Values                        |
-#===============================================:===============================
- Run This Layer ?       (0:Yes,       1:No     ):     1
- Coordinate           (0:spherical, 1:cartesian):     0
- Governing Eqn.       (0:linear,    1:nonlinear):     1
- Bottom Friction Switch? (0:Yes,1:No,2:var. n ) :     0
- Manning's Roughness Coef. (For fric.option=0)  :     0.013
- Layer Ouput Option? (0:Z+Hu+Hv;1:Z Only;2:NONE):     1
- GridSize Ratio of Parent layer to current layer:     16
- X_start                                        :   121.7227643425554
- X_end                                          :   122.0489548154786
- Y_start                                        :    24.22894457248688
- Y_end                                          :    25.0404101584892
- FileName of Water depth data                   :  4_7.xyz
- Data Format Option (0-OLD;1-MOST;2-XYZ;3-ETOPO):     3
- Grid Identification Number                     :    10
- Grid Level                                     :     3
- Parent Grid's ID Number                        :    02
-
-#===============================================:===============================
-#  Parameters for Sub-level grid -- layer 11    :Values                        |
-#===============================================:===============================
- Run This Layer ?       (0:Yes,       1:No     ):     1
- Coordinate           (0:spherical, 1:cartesian):     0
- Governing Eqn.       (0:linear,    1:nonlinear):     1
- Bottom Friction Switch? (0:Yes,1:No,2:var. n ) :     0
- Manning's Roughness Coef. (For fric.option=0)  :     0.013
- Layer Ouput Option? (0:Z+Hu+Hv;1:Z Only;2:NONE):     1
- GridSize Ratio of Parent layer to current layer:     16
- X_start                                        :   121.3906957787801
- X_end                                          :   121.8079853387364
- Y_start                                        :    23.41747516260113
- Y_end                                          :    24.38422152963531
- FileName of Water depth data                   :  4_8.xyz
- Data Format Option (0-OLD;1-MOST;2-XYZ;3-ETOPO):     3
- Grid Identification Number                     :    11
- Grid Level                                     :     3
- Parent Grid's ID Number                        :    02
-
-#===============================================:===============================
-#  Parameters for Sub-level grid -- layer 12    :Values                        |
-#===============================================:===============================
- Run This Layer ?       (0:Yes,       1:No     ):     1
- Coordinate           (0:spherical, 1:cartesian):     0
- Governing Eqn.       (0:linear,    1:nonlinear):     1
- Bottom Friction Switch? (0:Yes,1:No,2:var. n ) :     0
- Manning's Roughness Coef. (For fric.option=0)  :     0.013
- Layer Ouput Option? (0:Z+Hu+Hv;1:Z Only;2:NONE):     1
- GridSize Ratio of Parent layer to current layer:     16
- X_start                                        :   121.1203399645682
- X_end                                          :   121.4906102867619
- Y_start                                        :    22.74369554382476
- Y_end                                          :    23.51418785598371
- FileName of Water depth data                   :  4_9.xyz
- Data Format Option (0-OLD;1-MOST;2-XYZ;3-ETOPO):     3
- Grid Identification Number                     :    12
- Grid Level                                     :     3
- Parent Grid's ID Number                        :    02
-
-#===============================================:===============================
-#  Parameters for Sub-level grid -- layer 13    :Values                        |
-#===============================================:===============================
- Run This Layer ?       (0:Yes,       1:No     ):     1
- Coordinate           (0:spherical, 1:cartesian):     0
- Governing Eqn.       (0:linear,    1:nonlinear):     1
- Bottom Friction Switch? (0:Yes,1:No,2:var. n ) :     0
- Manning's Roughness Coef. (For fric.option=0)  :     0.013
- Layer Ouput Option? (0:Z+Hu+Hv;1:Z Only;2:NONE):     1
- GridSize Ratio of Parent layer to current layer:     16
- X_start                                        :   120.808842317314
- X_end                                          :   121.2084996631093
- Y_start                                        :    22.14603554034114
- Y_end                                          :    22.78475484366331
- FileName of Water depth data                   :  4_10.xyz
- Data Format Option (0-OLD;1-MOST;2-XYZ;3-ETOPO):     3
- Grid Identification Number                     :    13
- Grid Level                                     :     3
- Parent Grid's ID Number                        :    02
-
-#===============================================:===============================
-#  Parameters for Sub-level grid -- layer 14    :Values                        |
-#===============================================:===============================
- Run This Layer ?       (0:Yes,       1:No     ):     1
- Coordinate           (0:spherical, 1:cartesian):     0
- Governing Eqn.       (0:linear,    1:nonlinear):     1
- Bottom Friction Switch? (0:Yes,1:No,2:var. n ) :     0
- Manning's Roughness Coef. (For fric.option=0)  :     0.013
- Layer Ouput Option? (0:Z+Hu+Hv;1:Z Only;2:NONE):     1
- GridSize Ratio of Parent layer to current layer:     16
- X_start                                        :   120.808842317314
- X_end                                          :   121.2084996631093
- Y_start                                        :    22.14603554034114
- Y_end                                          :    22.78475484366331
- FileName of Water depth data                   :  4_10.xyz
- Data Format Option (0-OLD;1-MOST;2-XYZ;3-ETOPO):     3
- Grid Identification Number                     :    14
- Grid Level                                     :     3
- Parent Grid's ID Number                        :    02
-
-#===============================================:===============================
-#  Parameters for Sub-level grid -- layer 15    :Values                        |
-#===============================================:===============================
- Run This Layer ?       (0:Yes,       1:No     ):     1
- Coordinate           (0:spherical, 1:cartesian):     0
- Governing Eqn.       (0:linear,    1:nonlinear):     1
- Bottom Friction Switch? (0:Yes,1:No,2:var. n ) :     0
- Manning's Roughness Coef. (For fric.option=0)  :     0.013
- Layer Ouput Option? (0:Z+Hu+Hv;1:Z Only;2:NONE):     1
- GridSize Ratio of Parent layer to current layer:     16
- X_start                                        :   120.808842317314
- X_end                                          :   121.2084996631093
- Y_start                                        :    22.14603554034114
- Y_end                                          :    22.78475484366331
- FileName of Water depth data                   :  4_10.xyz
- Data Format Option (0-OLD;1-MOST;2-XYZ;3-ETOPO):     3
- Grid Identification Number                     :    15
- Grid Level                                     :     3
- Parent Grid's ID Number                        :    02
+ Resuming Time for Hot Start          (Seconds) :     0.00
+ Minimum WaterDepth offshore           (meters) :     0.00, 0.001    
+ Initial Cond. (0:FLT,1:File,2:WM,3:LS,4:FLT+LS):     0         
+ Boundary Cond.(0-Open;1-Absorb;2-Wall;3-FACTS) :     1, 0          
+ Specify Filename of z Input (for BC=3, FACTS)  :23926h.asc
+ Specify Filename of u Input (for BC=3, FACTS)  :23926u.asc
+ Specify Filename of v Input (for BC=3, FACTS)  :23926v.asc
+#
+#===============================================:================
+# Parameters for Fault Model (Segment 01)       :Values         |
+#===============================================:================
+ Number of FLT Planes (use fault_multi.ctl if>1):      2        
+ Rupture Start Time(,Uplift Duration)  (seconds):       0.0      
+ Faulting Option (0:Model-C; 1:Data; 9:Model-T) :       0        
+ Focal Depth                            (meters):    9000.000     
+ Length of Fault Plane                  (meters):   80000.000    
+ Width of Fault Plane                   (meters):   40000.000    
+ Dislocation of Fault Plane             (meters):       3.2000     
+ Strike Angle (theta)                  (degrees):      85.000    
+ Dip  Angle (delta)                    (degrees):      23.000    
+ Slip/Rake Angle (lamda)               (degrees):     108.000    
+ Origin of Numerical Domain: Latitude  (degrees):      -9.000  
+ Origin of Numerical Domain: Longitude (degrees):     121.000    
+ Epicenter Location: Latitude          (degrees):      -8.5320  
+ Epicenter Location: Longitude         (degrees):     122.025  
+ File Name of Input Data                        :none 
+ Data Format (0-COMCOT;1-MOST;2-XYZ;3-ASC)      :       0        
+#
+#===============================================:================
+#  Parameters for Incident Wave Maker           :Values         |
+#===============================================:================
+ Wave Type  (1-Solitary; 2-given; 3-focusing)   :       1        
+ File Name of Input Data (for Type=2)           :fse.dat
+ Incident direction( 1:tp,2:bt,3:lf,4:rt,5:obl) :       2        
+ Characteristic Wave Amplitude         (meters) :       0.500    
+ Typical Water depth                   (meters) :    2000.000    
+#
+#===============================================:================
+#  Parameters for Landslide / Ground Motion     :Values         |
+#===============================================:================
+ X_Start of Transient Motion Area               :     127.363     
+ X_End of Transient Motion Area                 :     129.971    
+ Y_Start of Transient Motion Area               :     -5.220    
+ Y_End of Transient Motion Area                 :     -2.707     
+ File Name of Shape Input[, format(3-XYZ;4-ASC)]: none
+ Option (0-OLD; 1-XYT; 2-LS.Solid; 3-LS.Flow)   :       2        
+#
+#===============================================:================
+# Configurations for all grid layers                             
+#===============================================:================
+# Parameters for 1st-level grids -- layer 01    :Values         |
+#===============================================:================
+ Run This Layer ?       (0:Yes,       1:No     ):       0        
+ Coordinate System   (0-Spherical, 1-Cartesian) :       0        
+ Governing Equations (0-linear,    1-nonlinear) :       1        
+ Grid Size       (dx, sph:minutes, Cart:meters) :       0.3      
+ Time Step Size                       (seconds) :       1.0      
+ Bottom Friction Switch (0-ON;1-OFF;2-ON,Var.n) :       1        
+ Manning's n (for Fric.Switch=0), {land, water} :       0.025    
+ Output Option?   (0-Z+Hu+Hv; 1-Z Only; 2-NONE) :       0        
+ X_start                                        :     121.000
+ X_end											:	  123.500
+ Y_Start                                        :      -9.000    
+ Y_end                                          :      -7.500 
+ File Name of Bathymetry Data                   : batimetri_layer1.asc
+ Format  (0-OLD;1-MOST;2-XYZ BP;3-XYZ BN;4-ASC) :       4        
+ Grid Identification Number (ID)                :      01        
+ Grid Level                                     :      01        
+ Parent Grid Layer's ID Number                  :      01        
+#
+#===============================================:================
+#  Parameters for Sub-level grid -- layer 02    :Values         |
+#===============================================:================
+ Run This Layer ?       (0:Yes,       1:No     ):       0        
+ Coordinate System   (0:spherical, 1:cartesian) :       0        
+ Governing Equations (0:linear,    1:nonlinear) :       1        
+ Bottom Friction Switch (0-ON,1-OFF,2:ON,Var.n) :       0        
+ Manning's n (for Fric.Switch=0), {land, water} :       0.025    
+ Output Option? (0-Z+Hu+Hv; 1-Z Only; 2-NONE)   :       0        
+ GridSize Ratio of Parent Grid to Current Grid  :       5        
+ X_start                                        :    122.000
+ X_end                                          :    123.000
+ Y_Start                                        :     -8.800
+ Y_end                                          :     -8.200
+ File Name of Bathymetry Data                   :  batimetri_layer2.asc
+ Format (0-OLD;1-MOST;2-XYZ BP;3-XYZ BN;4-ASC)  :       4        
+ Grid Identification Number (ID)                :      02
+ Grid Level                                     :      02
+ Parent Grid Layer's ID Number                  :      01
+#
+#===============================================:================
+#  Parameters for Sub-level grid -- layer 03    :Values         |
+#===============================================:================
+ Run This Layer ?       (0:Yes,       1:No     ):       0        
+ Coordinate System   (0:spherical, 1:cartesian) :       0        
+ Governing Equations (0:linear,    1:nonlinear) :       1        
+ Bottom Friction Switch (0-ON,1-OFF,2:ON,Var.n) :       0        
+ Manning's n (for Fric.Switch=0), {land, water} :       0.013    
+ Output Option? (0-Z+Hu+Hv; 1-Z Only; 2-NONE)   :       0        
+ GridSize Ratio of Parent Grid to Current Grid  :      10        
+ X_start                                        :    122.480
+ X_end                                          :    122.540
+ Y_Start                                        :     -8.450
+ Y_end                                          :     -8.390
+ File Name of Bathymetry Data                   :  batimetri_layer3.asc 
+ Format (0-OLD;1-MOST;2-XYZ BP;3-XYZ BN;4-ASC)  :       4        
+ Grid Identification Number (ID)                :      03
+ Grid Level                                     :      03
+ Parent Grid Layer's ID Number                  :      02
+#
+#===============================================:================
+#  Parameters for Sub-level grid -- layer 04    :Values         |
+#===============================================:================
+ Run This Layer ?       (0:Yes,       1:No     ):       1        
+ Coordinate System   (0:spherical, 1:cartesian) :       0        
+ Governing Equations (0:linear,    1:nonlinear) :       1        
+ Bottom Friction Switch (0-ON,1-OFF,2:ON,Var.n) :       1        
+ Manning's n (for Fric.Switch=0), {land, water} :       0.013    
+ Output Option? (0-Z+Hu+Hv; 1-Z Only; 2-NONE)   :       0        
+ GridSize Ratio of Parent Grid to Current Grid  :       8        
+ X_start                                        :    123.00005
+ X_end                                          :    123.11995
+ Y_Start                                        :    0.46005
+ Y_end                                          :    0.58995
+ File Name of Bathymetry Data                   :layer4_RBI_rev.asc
+ Format (0-OLD;1-MOST;2-XYZ BP;3-XYZ BN;4-ASC)  :       4        
+ Grid Identification Number (ID)                :      04
+ Grid Level                                     :      04
+ Parent Grid Layer's ID Number                  :      03
+#
+#===============================================:================
+#  Parameters for Sub-level grid -- layer 05    :Values         |
+#===============================================:================
+ Run This Layer ?       (0:Yes,       1:No     ):       1        
+ Coordinate System   (0:spherical, 1:cartesian) :       0        
+ Governing Equations (0:linear,    1:nonlinear) :       0        
+ Bottom Friction Switch (0-ON,1-OFF,2:ON,Var.n) :       1        
+ Manning's n (for Fric.Switch=0), {land, water} :       0.013    
+ Output Option? (0-Z+Hu+Hv; 1-Z Only; 2-NONE)   :       2        
+ GridSize Ratio of Parent Grid to Current Grid  :       2        
+ X_start                                        :    168.3714
+ X_end                                          :    183.3672
+ Y_Start                                        :    -46.4622
+ Y_end                                          :    -35.4359
+ File Name of Bathymetry Data                   :grid01_updated.xyz
+ Format (0-OLD;1-MOST;2-XYZ BP;3-XYZ BN;4-ASC)  :       3        
+ Grid Identification Number (ID)                :      05
+ Grid Level                                     :      05
+ Parent Grid Layer's ID Number                  :      04
+#
+#===============================================:================
+#  Parameters for Sub-level grid -- layer 06    :Values         |
+#===============================================:================
+ Run This Layer ?       (0:Yes,       1:No     ):       1        
+ Coordinate System   (0:spherical, 1:cartesian) :       0        
+ Governing Equations (0:linear,    1:nonlinear) :       0        
+ Bottom Friction Switch (0-ON,1-OFF,2:ON,Var.n) :       1        
+ Manning's n (for Fric.Switch=0), {land, water} :       0.013    
+ Output Option? (0-Z+Hu+Hv; 1-Z Only; 2-NONE)   :       2        
+ GridSize Ratio of Parent Grid to Current Grid  :       2        
+ X_start                                        :    169.1211
+ X_end                                          :    182.6549
+ Y_Start                                        :    -45.9109
+ Y_end                                          :    -35.9596
+ File Name of Bathymetry Data                   :grid01_updated.xyz
+ Format (0-OLD;1-MOST;2-XYZ BP;3-XYZ BN;4-ASC)  :       3        
+ Grid Identification Number (ID)                :      06
+ Grid Level                                     :      06
+ Parent Grid Layer's ID Number                  :      05
+#
+#===============================================:================
+#  Parameters for Sub-level grid -- layer 07    :Values         |
+#===============================================:================
+ Run This Layer ?       (0:Yes,       1:No     ):       1        
+ Coordinate System   (0:spherical, 1:cartesian) :       0        
+ Governing Equations (0:linear,    1:nonlinear) :       0        
+ Bottom Friction Switch (0-ON,1-OFF,2:ON,Var.n) :       1        
+ Manning's n (for Fric.Switch=0), {land, water} :       0.013    
+ Output Option? (0-Z+Hu+Hv; 1-Z Only; 2-NONE)   :       2        
+ GridSize Ratio of Parent Grid to Current Grid  :       2        
+ X_start                                        :    169.7978
+ X_end                                          :    182.0121
+ Y_Start                                        :    -45.4134
+ Y_end                                          :    -36.4323
+ File Name of Bathymetry Data                   :grid01_updated.xyz
+ Format (0-OLD;1-MOST;2-XYZ BP;3-XYZ BN;4-ASC)  :       3        
+ Grid Identification Number (ID)                :      07
+ Grid Level                                     :      07
+ Parent Grid Layer's ID Number                  :      06
+#
+#===============================================:================
+#  Parameters for Sub-level grid -- layer 08    :Values         |
+#===============================================:================
+ Run This Layer ?       (0:Yes,       1:No     ):       1        
+ Coordinate System   (0:spherical, 1:cartesian) :       0        
+ Governing Equations (0:linear,    1:nonlinear) :       0        
+ Bottom Friction Switch (0-ON,1-OFF,2:ON,Var.n) :       1        
+ Manning's n (for Fric.Switch=0), {land, water} :       0.013    
+ Output Option? (0-Z+Hu+Hv; 1-Z Only; 2-NONE)   :       2        
+ GridSize Ratio of Parent Grid to Current Grid  :       2        
+ X_start                                        :    170.4085
+ X_end                                          :    181.4319
+ Y_Start                                        :    -44.9643
+ Y_end                                          :    -36.8589
+ File Name of Bathymetry Data                   :grid01_updated.xyz
+ Format (0-OLD;1-MOST;2-XYZ BP;3-XYZ BN;4-ASC)  :       3        
+ Grid Identification Number (ID)                :      08
+ Grid Level                                     :      08
+ Parent Grid Layer's ID Number                  :      07
+#
+#===============================================:================
+#  Parameters for Sub-level grid -- layer 09    :Values         |
+#===============================================:================
+ Run This Layer ?       (0:Yes,       1:No     ):       1        
+ Coordinate System   (0:spherical, 1:cartesian) :       0        
+ Governing Equations (0:linear,    1:nonlinear) :       0        
+ Bottom Friction Switch (0-ON,1-OFF,2:ON,Var.n) :       1        
+ Manning's n (for Fric.Switch=0), {land, water} :       0.013    
+ Output Option? (0-Z+Hu+Hv; 1-Z Only; 2-NONE)   :       2        
+ GridSize Ratio of Parent Grid to Current Grid  :       2        
+ X_start                                        :    170.9597
+ X_end                                          :    180.9083
+ Y_Start                                        :    -44.5590
+ Y_end                                          :    -37.2439
+ File Name of Bathymetry Data                   :grid01_updated.xyz
+ Format (0-OLD;1-MOST;2-XYZ BP;3-XYZ BN;4-ASC)  :       3        
+ Grid Identification Number (ID)                :      09
+ Grid Level                                     :      09
+ Parent Grid Layer's ID Number                  :      08
+#
+#===============================================:================
+#  Parameters for Sub-level grid -- layer 10    :Values         |
+#===============================================:================
+ Run This Layer ?       (0:Yes,       1:No     ):       1        
+ Coordinate System   (0:spherical, 1:cartesian) :       0        
+ Governing Equations (0:linear,    1:nonlinear) :       0        
+ Bottom Friction Switch (0-ON,1-OFF,2:ON,Var.n) :       1        
+ Manning's n (for Fric.Switch=0), {land, water} :       0.013    
+ Output Option? (0-Z+Hu+Hv; 1-Z Only; 2-NONE)   :       2        
+ GridSize Ratio of Parent Grid to Current Grid  :       2        
+ X_start                                        :    171.4571
+ X_end                                          :    180.4357
+ Y_Start                                        :    -44.1933
+ Y_end                                          :    -37.5914
+ File Name of Bathymetry Data                   :grid01_updated.xyz
+ Format (0-OLD;1-MOST;2-XYZ BP;3-XYZ BN;4-ASC)  :       3        
+ Grid Identification Number (ID)                :      10
+ Grid Level                                     :      10
+ Parent Grid Layer's ID Number                  :      09
+#
+#===============================================:================
+#  Parameters for Sub-level grid -- layer 11    :Values         |
+#===============================================:================
+ Run This Layer ?       (0:Yes,       1:No     ):       1        
+ Coordinate System   (0:spherical, 1:cartesian) :       0        
+ Governing Equations (0:linear,    1:nonlinear) :       0        
+ Bottom Friction Switch (0-ON,1-OFF,2:ON,Var.n) :       1        
+ Manning's n (for Fric.Switch=0), {land, water} :       0.013    
+ Output Option? (0-Z+Hu+Hv; 1-Z Only; 2-NONE)   :       2        
+ GridSize Ratio of Parent Grid to Current Grid  :       2        
+ X_start                                        :    171.9061
+ X_end                                          :    180.0092
+ Y_Start                                        :    -43.8632
+ Y_end                                          :    -37.9050
+ File Name of Bathymetry Data                   :grid01_updated.xyz
+ Format (0-OLD;1-MOST;2-XYZ BP;3-XYZ BN;4-ASC)  :       3        
+ Grid Identification Number (ID)                :      11
+ Grid Level                                     :      11
+ Parent Grid Layer's ID Number                  :      10
+#
+#===============================================:================
+#  Parameters for Sub-level grid -- layer 12    :Values         |
+#===============================================:================
+ Run This Layer ?       (0:Yes,       1:No     ):       1        
+ Coordinate System   (0:spherical, 1:cartesian) :       0        
+ Governing Equations (0:linear,    1:nonlinear) :       0        
+ Bottom Friction Switch (0-ON,1-OFF,2:ON,Var.n) :       1        
+ Manning's n (for Fric.Switch=0), {land, water} :       0.013    
+ Output Option? (0-Z+Hu+Hv; 1-Z Only; 2-NONE)   :       2        
+ GridSize Ratio of Parent Grid to Current Grid  :       2        
+ X_start                                        :    172.3112
+ X_end                                          :    179.6243
+ Y_Start                                        :    -43.5653
+ Y_end                                          :    -38.1880
+ File Name of Bathymetry Data                   :grid01_updated.xyz
+ Format (0-OLD;1-MOST;2-XYZ BP;3-XYZ BN;4-ASC)  :       3        
+ Grid Identification Number (ID)                :      12
+ Grid Level                                     :      12
+ Parent Grid Layer's ID Number                  :      11
+#
+#===============================================:================
+#  Parameters for Sub-level grid -- layer 13    :Values         |
+#===============================================:================
+ Run This Layer ?       (0:Yes,       1:No     ):       1        
+ Coordinate System   (0:spherical, 1:cartesian) :       0        
+ Governing Equations (0:linear,    1:nonlinear) :       0        
+ Bottom Friction Switch (0-ON,1-OFF,2:ON,Var.n) :       1        
+ Manning's n (for Fric.Switch=0), {land, water} :       0.013    
+ Output Option? (0-Z+Hu+Hv; 1-Z Only; 2-NONE)   :       2        
+ GridSize Ratio of Parent Grid to Current Grid  :       2        
+ X_start                                        :    172.6769
+ X_end                                          :    179.2770
+ Y_Start                                        :    -43.2964
+ Y_end                                          :    -38.4434
+ File Name of Bathymetry Data                   :grid01_updated.xyz
+ Format (0-OLD;1-MOST;2-XYZ BP;3-XYZ BN;4-ASC)  :       3        
+ Grid Identification Number (ID)                :      13
+ Grid Level                                     :      13
+ Parent Grid Layer's ID Number                  :      12
+#
+#===============================================:================
+#  Parameters for Tide Gauge Locations          :Values         |
+#===============================================:================
+ 01. Number of Tide Gauges                      :      9
+ 02. File Name of Station Info                  :ts_location.dat
+#
