@@ -81,6 +81,8 @@
  Grid Identification Number (ID)                :      01        
  Grid Level                                     :      01        
  Parent Grid Layer's ID Number                  :      01
+ Number of Sub-level Grids                      :       1        
+ Sub-level Grid's ID Number                     :      02
 #===============================================:================
 #  Parameters for Sub-level grid -- layer 02    :Values         |
 #===============================================:================
